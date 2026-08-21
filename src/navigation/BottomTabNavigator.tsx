@@ -21,7 +21,7 @@ export default function BottomTabNavigator() {
                     component={tab.component}
                     options={{
                         title: tab.title,
-                        tabBarLabel: tab.label,
+                        tabBarLabel: tab.label ?? tab.title,
                         tabBarIcon: ({ color, size }) => (
                             <Icon source={tab.icon} size={size} color={color} />
                         ),
