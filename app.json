@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "ExerciseApp",
-    "slug": "ExerciseApp",
+    "name": "exercise-app",
+    "slug": "exercise-app",
     "version": "1.0.0",
+    "scheme": "exapp",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
