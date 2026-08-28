@@ -8,8 +8,12 @@ export const linking: LinkingOptions<ReactNavigation.RootParamList> = {
     ],
     config: {
         screens: {
-            Exercise1: "exercise-1",
-            Exercise2: "exercise-2",
+            Root: {
+                screens: {
+                    Exercise1: "exercise-1",
+                    Exercise2: "exercise-2",
+                },
+            },
         },
     }
 }
