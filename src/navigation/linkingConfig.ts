@@ -14,6 +14,7 @@ export const linking: LinkingOptions<ReactNavigation.RootParamList> = {
                     Exercise2: "exercise-2",
                 },
             },
+            NotFound: "*",  // Catch-all route (404)
         },
     }
 }
