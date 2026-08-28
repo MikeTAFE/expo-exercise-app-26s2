@@ -17,9 +17,29 @@ export default function BottomTabNavigator() {
                 headerStyle: {
                     backgroundColor: theme.colors.primary,
                 },
+                // tabBarStyle: styles the outer bar container
                 tabBarStyle: {
                     backgroundColor: "#fff",
+                    height: 60, // Safe height (esp. for web)
+                    borderTopWidth: 1,
+                    borderTopColor: theme.colors.outlineVariant,
                 },
+                // tabBarItemStyle: styles each tab item
+                tabBarItemStyle: {
+                    paddingVertical: 2,
+                    // borderWidth: 1,
+                },
+                // tabBarLabelStyle: styles the label text
+                tabBarLabelStyle: {
+                    ...theme.fonts.labelSmall, // Use Paper typography styles
+                    fontSize: 12,
+                    lineHeight: 14, // Prevent text clipping (esp. for web)
+                    marginTop: 2,
+                    marginBottom: 0,
+                },
+                // tabBarIconStyle: styles the icon wrapper
+                tabBarIconStyle: {},
+
                 headerTintColor: theme.colors.onPrimary,
                 tabBarActiveTintColor: theme.colors.primary,
                 tabBarInactiveTintColor: theme.colors.outline,
