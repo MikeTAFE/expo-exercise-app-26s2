@@ -9,21 +9,24 @@ const Stack = createNativeStackNavigator();
 
 export default function ExerciseNavigator() {
     return (
-        <Stack.Navigator screenOptions={{
-            headerShown: true,
-            headerStyle: {
-                backgroundColor: theme.colors.secondary,
-                
-                // "height" is not officially supported, esp. on iOS and Android
-                // @ts-expect-error
-                height: 40,
-            },
-            headerTitleStyle: {
-                ...theme.fonts.titleMedium,
-                // color: theme.colors.onSecondary,
-            },
-            headerTintColor: theme.colors.onSecondary,
-        }}>
+        <Stack.Navigator 
+            initialRouteName="ExerciseList"  // Route to render by default
+            screenOptions={{
+                headerShown: true,
+                headerStyle: {
+                    backgroundColor: theme.colors.secondary,
+                    
+                    // "height" is not officially supported, esp. on iOS and Android
+                    // @ts-expect-error
+                    height: 40,
+                },
+                headerTitleStyle: {
+                    ...theme.fonts.titleMedium,
+                    // color: theme.colors.onSecondary,
+                },
+                headerTintColor: theme.colors.onSecondary,
+            }}
+        >
             <Stack.Screen
                 name="ExerciseList"
                 component={ExerciseListScreen}
