@@ -45,6 +45,9 @@ export const tabs: Tab[] = [
         title: "Exercises",
         icon: "book-open-page-variant-outline",
         component: ExerciseNavigator,
+        options: {
+            popToTopOnBlur: true,  // Nested stack should be "popped" to the top of the stack when navigating away from this tab
+        },
     },
     {
         name: "Exercise1",
