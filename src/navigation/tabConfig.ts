@@ -1,3 +1,4 @@
+import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import Exercise1Screen from "../screens/Exercise1Screen";
 import Exercise2Screen from "../screens/Exercise2Screen";
 import HomeScreen from "../screens/HomeScreen";
@@ -21,6 +22,9 @@ interface Tab {
 
     /** React component rendered for the tab. */
     component: React.ComponentType<any>;
+
+    /** Options for this tab, e.g. styling and behaviour. */
+    options?: BottomTabNavigationOptions,
 }
 
 // Bottom tabs for navigation
@@ -31,6 +35,9 @@ export const tabs: Tab[] = [
         title: "Home",
         icon: "home",
         component: HomeScreen,
+        options: {
+            headerShown: false,
+        },
     },
     {
         name: "Exercises",
