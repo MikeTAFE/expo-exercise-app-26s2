@@ -8,17 +8,19 @@ export const linking: LinkingOptions<ReactNavigation.RootParamList> = {
     ],
     config: {
         // Root navigator (stack)
+        path: "/",
         screens: {
             Root: {
                 // Bottom tab nav (tabs)
                 screens: {
+                    Home: "home",
                     Exercises: {
                         // Exercise nav (stack)
                         path: "exercises",
                         screens: {
-                            ExerciseList: "",
-                            Exercise1: "01",
-                            Exercise2: "02",
+                            ExerciseList: "", // URL: /exercises/
+                            Exercise1: "01",  // URL: /exercises/01
+                            Exercise2: "02",  // URL: /exercises/02
                         }
                     },
                     Exercise1: "exercise-1",
