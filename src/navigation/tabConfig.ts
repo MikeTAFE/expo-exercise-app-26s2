@@ -1,5 +1,6 @@
 import Exercise1Screen from "../screens/Exercise1Screen";
 import Exercise2Screen from "../screens/Exercise2Screen";
+import HomeScreen from "../screens/HomeScreen";
 import ExerciseNavigator from "./ExerciseNavigator";
 
 /**
@@ -24,6 +25,13 @@ interface Tab {
 
 // Bottom tabs for navigation
 export const tabs: Tab[] = [
+    {
+        name: "Home",
+        label: "Home",
+        title: "Home",
+        icon: "home",
+        component: HomeScreen,
+    },
     {
         name: "Exercises",
         label: "Exercises",
