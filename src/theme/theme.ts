@@ -30,14 +30,14 @@ function combineThemes(paperTheme: MD3Theme, navigationTheme: ReactNavigation.Th
             onSecondary: "#fff",
             // onSurface: "#333",
 
-            // Pull in override colours
-            ...overrides?.colors,
-
             // Map navigation semantics/names to MD3 names
             card: paperTheme.colors.surface,
             text: paperTheme.colors.onSurface,
             border: paperTheme.colors.outline,
             notification: paperTheme.colors.secondary,
+
+            // Pull in override colours
+            ...overrides?.colors,
         }
     };
 }
