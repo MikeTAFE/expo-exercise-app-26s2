@@ -2,12 +2,15 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ExerciseListScreen from "../screens/ExerciseListScreen";
 import Exercise1Screen from "../screens/Exercise1Screen";
 import Exercise2Screen from "../screens/Exercise2Screen";
-import theme from "../theme/theme";
-
+import { useTheme } from "../context/ThemeContext";
 
 const Stack = createNativeStackNavigator();
 
 export default function ExerciseNavigator() {
+
+    // Use theme context
+    const {theme} = useTheme();
+
     return (
         <Stack.Navigator 
             initialRouteName="ExerciseList"  // Route to render by default

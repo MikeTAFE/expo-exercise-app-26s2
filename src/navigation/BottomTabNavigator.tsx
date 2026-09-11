@@ -2,11 +2,15 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { tabs } from "./tabConfig";
 import { Icon } from "react-native-paper";
-import theme from "../theme/theme";
+import { useTheme } from "../context/ThemeContext";
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabNavigator() {
+
+    // Use theme context
+    const {theme} = useTheme();
+
     return (
         <Tab.Navigator
             screenOptions={{
