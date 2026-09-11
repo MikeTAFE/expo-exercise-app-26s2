@@ -1,6 +1,9 @@
-import { createContext, PropsWithChildren, useContext, useMemo, useState } from "react";
+import { createContext, PropsWithChildren, useContext, useEffect, useMemo, useState } from "react";
 import { useColorScheme } from "react-native";
 import { combinedLightTheme, combinedDarkTheme } from "../theme/theme";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const ASYNC_STORAGE_KEY = "@exercise-app:theme-override";
 
 type ThemeContextType = {
     theme: typeof combinedLightTheme,
@@ -19,6 +22,35 @@ export function ThemeProvider({ children }: PropsWithChildren) {
 
     // Allow overriding theme
     const [overrideTheme, setOverrideTheme] = useState<string | null>(null);
+
+    // Load saved theme on startup (AsyncStorage)
+    useEffect(() => {
+        loadStoredTheme();
+    }, []);
+
+    const loadStoredTheme = async () => {
+        try {
+            const savedTheme = await AsyncStorage.getItem(ASYNC_STORAGE_KEY);
+            if (savedTheme !== null) {
+                setOverrideTheme(JSON.parse(savedTheme));
+            }
+        } catch (error) {
+            console.warn("Failed to load theme preference", error);
+        }
+    };
+
+    // Save theme when its changed (AsyncStorage)
+    useEffect(() => {
+        saveStoredTheme();
+    }, [overrideTheme]);
+
+    const saveStoredTheme = async () => {
+        try {
+            await AsyncStorage.setItem(ASYNC_STORAGE_KEY, JSON.stringify(overrideTheme));
+        } catch (error) {
+            console.warn("Failed to save theme preference", error);
+        }
+    };
 
     // Determine theme to use
     const theme = useMemo(() => {
