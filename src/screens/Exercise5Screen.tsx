@@ -1,4 +1,4 @@
-import { FlatList, ListRenderItemInfo, View } from "react-native";
+import { FlatList, ListRenderItemInfo, StyleSheet, View } from "react-native";
 import { ActivityIndicator, Button, Card, Icon, IconButton, Text } from "react-native-paper";
 import ScreenContainer from "../components/ScreenContainer";
 import { useEffect, useLayoutEffect, useState } from "react";
@@ -79,7 +79,7 @@ export default function Exercise5Screen({ navigation }: ScreenProps) {
 
     // Render each user
     const renderUser = ({ item, index }: ListRenderItemInfo<any>) => (
-        <Card>
+        <Card key={item.id} style={styles.userCard}>
             <Card.Content>
                 <Text>{index + 1}. {item.name}</Text>
             </Card.Content>
@@ -89,10 +89,9 @@ export default function Exercise5Screen({ navigation }: ScreenProps) {
     // Loading state
     if (isLoading) {
         return (
-            <ScreenContainer>
-                <Text variant="headlineSmall">Exercise 5: Users via API</Text>
+            <ScreenContainer style={styles.centered}>
                 <ActivityIndicator size="large" />
-                <Text>Loading users...</Text>
+                <Text style={styles.loadingText}>Loading users...</Text>
             </ScreenContainer>
         );
     }
@@ -100,28 +99,78 @@ export default function Exercise5Screen({ navigation }: ScreenProps) {
     // Error state
     if (errorMessage) {
         return (
-            <ScreenContainer>
-                <Text variant="headlineSmall">
-                    <Icon size={30} source="alert-rhombus" />
-                    ERROR
-                </Text>
-                <Text>{errorMessage}</Text>
-                <Button
-                    mode="contained"
-                    onPress={loadUsers}
-                >Retry</Button>
+            <ScreenContainer style={styles.centered}>
+                <Card style={styles.errorCard}>
+                    <Card.Content>
+                        <View style={styles.errorTitle}>
+                            <Icon size={30} source="alert-rhombus" color="red" />
+                            <Text variant="headlineSmall" style={styles.errorTitleText}>Error</Text>
+                        </View>
+                        <Text style={styles.errorText}>{errorMessage}</Text>
+                        <Button
+                            mode="contained"
+                            onPress={loadUsers}
+                        >Retry</Button>
+                    </Card.Content>
+                </Card>
             </ScreenContainer>
         );
     }
 
     return (
         <ScreenContainer>
-            <Text variant="headlineSmall">Exercise 5: Users via API</Text>
+            <Text variant="titleMedium" style={styles.title}>Exercise 5: Users via API</Text>
             
             <FlatList
                 data={users}
                 renderItem={renderUser}
+                // NOTE: pull-to-refresh will not work on web by default
+                refreshing={isLoading}
+                onRefresh={loadUsers}
+                contentContainerStyle={styles.userList}
             />
         </ScreenContainer>
     );
 }
+
+const styles = StyleSheet.create({
+    centered: {
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    title: {
+        marginBottom: 10
+    },
+    loadingText: {
+        marginTop: 10
+    },
+    userList: {
+        gap: 5,
+        marginTop: 10,
+    },
+    userCard: {
+        margin: 2,
+    },
+    errorCard: {
+        width: "100%",
+        maxWidth: 400
+    },
+    errorTitle: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 4,
+        marginBottom: 10
+    },
+    errorTitleText: {
+        color: "red",
+    },
+    errorText: {
+        // color: "red",
+        fontSize: 16,
+        marginBottom: 20
+    },
+    retryButton: {
+        marginTop: 5
+    }
+})
