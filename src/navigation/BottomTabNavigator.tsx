@@ -47,6 +47,10 @@ export default function BottomTabNavigator() {
                 headerTintColor: theme.colors.onPrimary,
                 tabBarActiveTintColor: theme.colors.primary,
                 tabBarInactiveTintColor: theme.colors.outline,
+
+                sceneStyle: {
+                    backgroundColor: theme.colors.background,
+                }
             }}
         >
             {/* Loop through the tabs defined in tabConfig.ts */}

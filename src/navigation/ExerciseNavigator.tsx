@@ -29,6 +29,9 @@ export default function ExerciseNavigator() {
                     // color: theme.colors.onSecondary,
                 },
                 headerTintColor: theme.colors.onSecondary,
+                contentStyle: {
+                    backgroundColor: theme.colors.background,
+                }
             }}
         >
             <Stack.Screen
