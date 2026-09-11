@@ -3,6 +3,7 @@ import Exercise1Screen from "../screens/Exercise1Screen";
 import Exercise2Screen from "../screens/Exercise2Screen";
 import HomeScreen from "../screens/HomeScreen";
 import ExerciseNavigator from "./ExerciseNavigator";
+import SettingsScreen from "../screens/SettingsScreen";
 
 /**
  * Configuration for a bottom navigation tab.
@@ -55,18 +56,25 @@ export const tabs: Tab[] = [
             screen: "ExerciseList"
         },
     },
+    // {
+    //     name: "Exercise1",
+    //     label: "Ex 01",
+    //     title: "Exercise 01",
+    //     icon: "numeric-1-circle",
+    //     component: Exercise1Screen,
+    // },
+    // {
+    //     name: "Exercise2",
+    //     title: "Exercise 02",
+    //     // label: "Ex 02",
+    //     icon: "numeric-2-circle",
+    //     component: Exercise2Screen,
+    // },
     {
-        name: "Exercise1",
-        label: "Ex 01",
-        title: "Exercise 01",
-        icon: "numeric-1-circle",
-        component: Exercise1Screen,
-    },
-    {
-        name: "Exercise2",
-        title: "Exercise 02",
-        // label: "Ex 02",
-        icon: "numeric-2-circle",
-        component: Exercise2Screen,
+        name: "Settings",
+        title: "Settings",
+        label: "Settings",
+        icon: "cog",
+        component: SettingsScreen,
     },
 ];
