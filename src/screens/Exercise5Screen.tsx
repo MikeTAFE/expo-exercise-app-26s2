@@ -1,0 +1,127 @@
+import { FlatList, ListRenderItemInfo, View } from "react-native";
+import { ActivityIndicator, Button, Card, Icon, IconButton, Text } from "react-native-paper";
+import ScreenContainer from "../components/ScreenContainer";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+const API_URL = `https://jsonplaceholder.typicode.com/users`;
+
+type ScreenProps = {
+    navigation: NativeStackNavigationProp<any>
+};
+
+export default function Exercise5Screen({ navigation }: ScreenProps) {
+
+    // This screen has 3 mutually-exclusive states: loading, error, data
+
+    const [users, setUsers] = useState<string[]>([]);
+    const [errorMessage, setErrorMessage] = useState<string>();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    // Load users from API
+    const loadUsers = async () => {
+        try {
+
+            // Reset the loading/error state
+            setIsLoading(true);
+            setErrorMessage(undefined);
+
+            // EXAMPLE: non-async & await method to handle Promises
+            // fetch(API_URL)
+            //     .then(r => r.json())
+            //     .then(d => console.log(d))
+            //     .catch(e => console.warn(e))
+            
+            // Make a simple GET request
+            const response = await fetch(API_URL);
+
+            // Check if not OK response status (success = 200-299)
+            if (!response.ok) {
+                throw new Error(`API request failed with status ${response.status}`)
+            }
+
+            // Convert JSON response
+            const data = await response.json();
+
+            // TESTING: dump user data in console
+            // console.log({user_data: data});
+
+            // Update state
+            setUsers(data);
+
+        } catch (error) {
+            setErrorMessage("Unable to load users.");
+            console.warn("Unable to load users:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // Load users on startup/mount
+    // useEffect() lifecycle: screen mounts -> useEffect runs -> fetchAPI -> setUsers(data) -> setIsLoading(false) -> screen re-renders
+    useEffect(() => {
+        loadUsers();
+    }, []);
+
+    // Add refresh button to header (insert into React Navigation header)
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <IconButton
+                    icon="refresh"
+                    iconColor="white"
+                    onPress={loadUsers}
+                    disabled={isLoading}
+                />
+            )
+        })
+    }, [navigation, isLoading])
+
+    // Render each user
+    const renderUser = ({ item, index }: ListRenderItemInfo<any>) => (
+        <Card>
+            <Card.Content>
+                <Text>{index + 1}. {item.name}</Text>
+            </Card.Content>
+        </Card>
+    );
+
+    // Loading state
+    if (isLoading) {
+        return (
+            <ScreenContainer>
+                <Text variant="headlineSmall">Exercise 5: Users via API</Text>
+                <ActivityIndicator size="large" />
+                <Text>Loading users...</Text>
+            </ScreenContainer>
+        );
+    }
+
+    // Error state
+    if (errorMessage) {
+        return (
+            <ScreenContainer>
+                <Text variant="headlineSmall">
+                    <Icon size={30} source="alert-rhombus" />
+                    ERROR
+                </Text>
+                <Text>{errorMessage}</Text>
+                <Button
+                    mode="contained"
+                    onPress={loadUsers}
+                >Retry</Button>
+            </ScreenContainer>
+        );
+    }
+
+    return (
+        <ScreenContainer>
+            <Text variant="headlineSmall">Exercise 5: Users via API</Text>
+            
+            <FlatList
+                data={users}
+                renderItem={renderUser}
+            />
+        </ScreenContainer>
+    );
+}

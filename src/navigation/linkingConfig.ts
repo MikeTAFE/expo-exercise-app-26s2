@@ -21,6 +21,7 @@ export const linking: LinkingOptions<ReactNavigation.RootParamList> = {
                             ExerciseList: "", // URL: /exercises/
                             Exercise1: "01",  // URL: /exercises/01
                             Exercise2: "02",  // URL: /exercises/02
+                            Exercise5: "05",  // URL: /exercises/05
                         }
                     },
                     // Exercise1: "exercise-1",

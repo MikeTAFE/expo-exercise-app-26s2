@@ -3,6 +3,7 @@ import ExerciseListScreen from "../screens/ExerciseListScreen";
 import Exercise1Screen from "../screens/Exercise1Screen";
 import Exercise2Screen from "../screens/Exercise2Screen";
 import { useTheme } from "../context/ThemeContext";
+import Exercise5Screen from "../screens/Exercise5Screen";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,13 @@ export default function ExerciseNavigator() {
                 component={Exercise2Screen}
                 options={{
                     title: "Exercise 02: Counter"
+                }}
+            />
+            <Stack.Screen 
+                name="Exercise5"
+                component={Exercise5Screen}
+                options={{
+                    title: "Exercise 05: Users via API"
                 }}
             />
         </Stack.Navigator>
