@@ -1,10 +1,14 @@
 import { PropsWithChildren } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 
+type ScreenContainerProps = {
+    children?: React.ReactNode;
+    style?: StyleProp<ViewStyle>;
+};
 
-export default function ScreenContainer({ children }: PropsWithChildren) {
+export default function ScreenContainer({ children, style }: ScreenContainerProps) {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             {children}
         </View>
     );
